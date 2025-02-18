@@ -49,7 +49,7 @@ class RoomCleaning(models.Model):
     def _check_cleaning_limit(self):
         for record in self:
             # Skip check for new records (temporary NewId)
-            if not record.id or isinstance(record.id, models.NewId):
+            if not record.id :
                 continue
 
             # Count the number of cleanings for the same room on the same day
