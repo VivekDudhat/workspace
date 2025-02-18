@@ -7,7 +7,9 @@
         <field name="model">hotel.room.cleaning</field>
         <field name="arch" type="xml">
             <tree>
-                
+                <field name="cleaning_id"/>
+                <field name="cleaning_date"/>
+                <field name="charge"/>
             </tree>
         </field>
     </record>
@@ -20,7 +22,9 @@
             <form string="Hotel Room Cleaning">
                 <sheet>
                     <group>
-                         <field name="cleaning_id"/>                        
+                         <field name="cleaning_id"/>      
+                         <field name="cleaning_date"/>    
+                         <field name="charge"/>              
                     </group>
                 </sheet>
             </form>
