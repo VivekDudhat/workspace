@@ -8,14 +8,15 @@ class RoomCleaning(models.Model):
 
     cleaning_id = fields.Many2one('hotel.rooms', string='Room Number', required=True)
     cleaning_date = fields.Date(string='Cleaning Date', default=fields.Date.today, required=True)
-    charge = fields.Float(string='Charge', compute='_compute_charge', store=True)
+    charge = fields.Float(string = 'Charge for Room cleaning',default='500', readonly=True)
+    total_cost = fields.Float(string='Total Charge', compute='_compute_charge', store=True)
 
     @api.depends('cleaning_id', 'cleaning_date')
     def _compute_charge(self):
         for record in self:
             # Skip computation for new records (temporary NewId)
             if not record.id :
-                record.charge = 0
+                record.total_cost = 0
                 continue
 
             # Count the number of cleanings for the same room on the same day
@@ -27,9 +28,9 @@ class RoomCleaning(models.Model):
             
             # If more than one cleaning, charge 500 INR per additional cleaning
             if cleaning_count > 0:
-                record.charge = 500 * cleaning_count
+                record.total_cost = 500 * cleaning_count
             else:
-                record.charge = 0
+                record.total_cost = 0
 
     @api.model
     def create(self, vals):
