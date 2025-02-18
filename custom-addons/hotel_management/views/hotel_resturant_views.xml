@@ -20,8 +20,9 @@
             <form string="Hotel Resturant">
                 <sheet>
                   <group>
-                  
                     <field name="food_id"/>
+                    <field name="price"/>
+                    <field name="room_numner_id"/>
                   </group>
                     
                 </sheet>
