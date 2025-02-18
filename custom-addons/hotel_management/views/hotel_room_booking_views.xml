@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View for hotel.room.booking -->
+        <record id="view_hotel_room_booking_tree" model="ir.ui.view">
+            <field name="name">view.hotel.room.booking.tree</field>
+            <field name="model">hotel.room.booking</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="customer_name"/>
+                    <field name="contact"/>
+                    <field name="email_id"/>
+                    <field name="date_of_birth"/>
+                    <field name="age"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <field name="room_id"/>
+                    <field name="state" widget = "badge" decoration-info="state == 'booked'" decoration-success = "state == 'checked_in'" decoration-danger = "state =='canceled'" decoration-warning = "state == 'checked_out'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for hotel.room.booking -->
+        <record id="view_hotel_room_booking_form" model="ir.ui.view">
+            <field name="name">view.hotel.room.booking.form</field>
+            <field name="model">hotel.room.booking</field>
+            <field name="arch" type="xml">
+                <form string="Hotel Room Booking">
+                    <header>
+                        <button string="Confirm Booking" type="object" name="action_book" invisible = "state != 'draft'" class = "oe_highlight" icon="fa-check-circle"/>
+                        <button string="Check-In" type="object" name="action_check_in" invisible =  "state != 'booked'" class = "oe_highlight" icon = "fa-check"/>
+                        <button string="Check-Out" type="object" name="action_check_out" invisible = "state != 'checked_in'" class = "oe_highlight" icon = "fa-times"/>
+                        <button string="Cancel Booking" type="object" name="action_cancel" invisible = "state != 'booked'" class = "oe_highlight" icon = "fa-times"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,booked,checked_in,checked_out,canceled"/>
+                    </header>
+                    <sheet>
+                        <group string="Customer Details">
+                            <field name="customer_name"/>
+                            <field name="gender" widget = "radio" options ="{'horizontal':'true'}"/>
+                            <field name="contact"/>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                            <field name="email_id"/>
+                            <field name="document_proof"/>
+                        </group>
+                        <group string = "Room Details">
+                            <field name="room_id" domain="[('is_booked', '=', False)]"/>
+                            <field name="room_type"/>
+                            <field name="room_price"/>
+                            <field name="check_in" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <field name="check_out" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View for hotel.room.booking -->
+        <record id="view_hotel_room_booking_search" model="ir.ui.view">
+            <field name="name">view.hotel.room.booking.search</field>
+            <field name="model">hotel.room.booking</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="Booking" domain="[('state', '=', 'booked')]" />
+                    <filter name="Check in" domain="[('state', '=', 'checked_in')]" />
+                    <filter name="Check out" domain="[('state', '=', 'checked_out')]" />
+                    <filter name="Canceled" domain="[('state', '=', 'canceled')]" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Action for hotel.room.booking -->
+        <record id="action_hotel_room_booking" model="ir.actions.act_window">
+            <field name="name">Hotel Room Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hotel.room.booking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                There are no bookings yet. Click here to create a new hotel room booking.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item for Room Booking -->
+        <menuitem id="room_booking_menu" name="Booking" action="action_hotel_room_booking" parent="hotel_menu" sequence="40"/>
+
+
+
+
+
+    </data>
+
+</odoo>

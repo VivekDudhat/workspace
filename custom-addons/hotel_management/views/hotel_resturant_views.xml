@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hotel.resturant View Tree -->
+    <record id="view_hotel_resturant_tree" model="ir.ui.view">
+        <field name="name">view.hotel.resturant.tree</field>
+        <field name="model">hotel.resturant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="food_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View hotel.resturant form -->
+    <record id="view_hotel_resturant_form" model="ir.ui.view">
+        <field name="name">view.hotel.resturant.form</field>
+        <field name="model">hotel.resturant</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Resturant">
+                <sheet>
+                  <group>
+                  
+                    <field name="food_id"/>
+                  </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View hotel.resturant search -->
+    <!-- <record id="view_hotel_resturant_search" model="ir.ui.view">
+        <field name="name">view.hotel.resturant.search</field>
+        <field name="model">hotel.resturant</field>
+        <field name="arch" type="xml">
+            <search>
+              
+            </search>
+        </field>
+    </record> -->
+
+    <!-- Action hotel.resturant -->
+    <record id="action_hotel_resturant" model="ir.actions.act_window">
+        <field name="name">Hotel Resturant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.resturant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Hotel Resturant.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="resturant_menu"
+        name="Resturant"
+        action="action_hotel_resturant"
+        parent = "hotel_menu"
+        sequence = "20"
+        
+       
+    />
+
+</odoo>

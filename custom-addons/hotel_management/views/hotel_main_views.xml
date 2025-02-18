@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <data>
+
+    <!-- Action hotel.main -->
+    <record id="action_hotel_main" model="ir.actions.act_window">
+        <field name="name">Hotel Main</field>
+        <field name="res_model">hotel.main</field>
+    </record>
+      <menuitem
+        id="hotel_menu"
+        name="Hotel"
+        action="action_hotel_main"
+    />
+    
+   
+   </data>
+   
+</odoo>

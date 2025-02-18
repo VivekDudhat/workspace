@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hotel.rooms View Tree -->
+    <record id="view_hotel_rooms_tree" model="ir.ui.view">
+        <field name="name">view.hotel.rooms.tree</field>
+        <field name="model">hotel.rooms</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="Rooms"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View hotel.rooms form -->
+    <record id="view_hotel_rooms_form" model="ir.ui.view">
+        <field name="name">view.hotel.rooms.form</field>
+        <field name="model">hotel.rooms</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Rooms">
+                <sheet>
+                    <group>
+                    <field name="Rooms"/>
+                    <field name="rooms_ids"/>
+                    <field name="price"/>
+                   
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View hotel.rooms search -->
+    <!-- <record id="view_hotel_rooms_search" model="ir.ui.view">
+        <field name="name">view.hotel.rooms.search</field>
+        <field name="model">hotel.rooms</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+    <!-- Action hotel.rooms -->
+    <record id="action_hotel_rooms" model="ir.actions.act_window">
+        <field name="name">Hotel Rooms</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.rooms</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <menuitem
+            id="Room_menu"
+            name="Rooms"
+            action="action_hotel_rooms"
+            parent = "hotel_menu"
+            sequence = "10"
+        />
+
+</odoo>
