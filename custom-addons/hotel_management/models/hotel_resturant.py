@@ -4,6 +4,7 @@ from odoo import fields, api, models
 class HotelResturant(models.Model):
     _name = 'hotel.resturant'
     _description = 'Hotel Resturant'
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     
     _inherits = {'product.product': 'food_id'}
@@ -11,6 +12,8 @@ class HotelResturant(models.Model):
     food_id = fields.Many2one('product.product', string="Food item", required=True, ondelete="cascade",domain=[('categ_id.name','=','Food',)])
     food_name = fields.Char(string='Food')
     price = fields.Float(string = "Price",related='food_id.lst_price')
+    food_image = fields.Binary(string="Food Image", related='food_id.image_1920', store=True)
+    
     state = fields.Selection([('order', 'Order'),('cancel','Cancel')])
 
 
