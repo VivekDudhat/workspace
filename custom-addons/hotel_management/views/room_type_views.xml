@@ -25,6 +25,7 @@
                         <field name="room_type"/>
                         <field name="room_details"/>
                         <field name="room_price"/>
+                        <field name="room_image" widget="image" class="oe_avatar"/>
                     </group>
                 </sheet>
             </form>
@@ -57,12 +58,8 @@
         </field>
     </record>
 
-     <menuitem
-            id="room_type_menu"
-            name="Room Type"
-            action="action_room_type"
+    <menuitem id="room_type_menu" name="Room Type" action="action_room_type"
             parent = "hotel_menu"
-            sequence = "30"
-        />
+            sequence = "30" />
 
 </odoo>

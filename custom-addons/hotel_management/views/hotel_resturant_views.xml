@@ -7,7 +7,9 @@
         <field name="model">hotel.resturant</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="food_name"/>
+                <field name="room_id"/>
+                <field name="food_id"/>
+                <field name="price"/>
             </tree>
         </field>
     </record>
@@ -18,13 +20,18 @@
         <field name="model">hotel.resturant</field>
         <field name="arch" type="xml">
             <form string="Hotel Resturant">
+                <header>
+                    <field name="state" widget = 'statusbar'/>
+                    <button name="action_order" type="object" string="Order" class = "oe_highlight" icon = "fa-check"/>
+                    <button  name="action_cancel" type="object" string="Cancel" invisible = "state != 'order'" class = "oe_highlight" icon = "fa-times"/>
+                </header>
                 <sheet>
-                  <group>
-                  <field name="room_id"/>
-                    <field name="food_id"/>
-                    <field name="price"/>
-                  </group>
-                    
+                    <group>
+                        <field name="room_id"/>
+                        <field name="food_id"/>
+                        <field name="price"/>
+                    </group>
+
                 </sheet>
             </form>
         </field>
@@ -56,14 +63,8 @@
         </field>
     </record>
 
-    <menuitem
-        id="resturant_menu"
-        name="Resturant"
-        action="action_hotel_resturant"
+    <menuitem id="resturant_menu" name="Resturant" action="action_hotel_resturant"
         parent = "hotel_menu"
-        sequence = "20"
-        
-       
-    />
+        sequence = "20" />
 
 </odoo>

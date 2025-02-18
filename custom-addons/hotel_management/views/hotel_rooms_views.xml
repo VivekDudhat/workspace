@@ -23,6 +23,7 @@
                     <field name="Rooms"/>
                     <field name="rooms_ids"/>
                     <field name="price"/>
+                    
                    
                     </group>
                 </sheet>

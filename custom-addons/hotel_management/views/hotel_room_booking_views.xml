@@ -50,6 +50,7 @@
                             <field name="room_price"/>
                             <field name="check_in" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
                             <field name="check_out" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <!-- <field name="room_image"/> -->
                         </group>
                     </sheet>
                     <div class="oe_chatter">

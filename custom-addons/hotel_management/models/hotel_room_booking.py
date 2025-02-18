@@ -23,6 +23,7 @@ class HotelBooking(models.Model):
     room_id = fields.Many2one('hotel.rooms', string="Room", required=True,tracking = True)
     room_type =fields.Many2one (string='Room Type', related='room_id.rooms_ids')
     room_price = fields.Float(string = "Price",related='room_id.price')
+    room_image = fields.Image(string="Room Image", related='room_id.rooms_ids.room_image', store=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('booked', 'Booked'),
@@ -141,8 +142,8 @@ class HotelBooking(models.Model):
                 new_room.is_booked = True
         return super(HotelBooking, self).write(vals)
 
-    # def unlink(self):
-    #     for record in self:
-    #         if record.state != 'checked_out':
-    #             record.room_id.is_booked = False
-    #     return super(HotelBooking, self).unlink()
+    def unlink(self):
+        for record in self:
+            if record.state != 'checked_out':
+                record.room_id.is_booked = False
+        return super(HotelBooking, self).unlink()
