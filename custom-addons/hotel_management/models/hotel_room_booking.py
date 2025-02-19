@@ -17,7 +17,7 @@ class HotelBooking(models.Model):
     date_of_birth = fields.Date(string='Date Of Birth')
     age = fields.Integer(string="Age", compute='_compute_age', store=True)
     email_id = fields.Char(string="Email", )
-    document_proof = fields.Binary(string='Photo ID')
+    document_proof = fields.Binary(string='Document Proof')
     check_in = fields.Datetime(string="Check-In",)  # default=fields.Datetime.now
     check_out = fields.Datetime(string="Check-Out", default=lambda self: self._default_check_out())
     room_id = fields.Many2one('hotel.rooms', string="Room", required=True,tracking = True)
@@ -31,9 +31,21 @@ class HotelBooking(models.Model):
         ('checked_out', 'Checked-Out'),
         ('canceled', 'Canceled'),
     ], string="State", default='draft', readonly=True,tracking = True)
+    adult_count = fields.Integer(string="No of Adult")
+    children_count = fields.Integer(string = "No of Children")
+    
 
+    
+    @api.constrains('self')
+    def _check_(self):
+        for record in self:
+            if record.adult_count < 1:
+                raise ValidationError("There must be one adult")
+            if record.children_count < 0 :
+                raise ValidationError("Children cannot be in negative")
+            
+    
     @api.constrains('room_id')
-   
     def _default_check_out(self):
         # Default check-out time is 12:00 PM 
         check_in = self.check_in or fields.Datetime.now()
@@ -127,6 +139,22 @@ class HotelBooking(models.Model):
     def create(self, vals):
         if 'room_id' not in vals or not vals['room_id']:
             raise ValidationError("Please select a room before creating the booking.")
+        adult_count = vals.get('adult_count', 1)
+        children_count = vals.get('children_count', 0)
+
+        if adult_count <= 2 and children_count <= 1 :
+            normal_room = self.env['hotel.rooms'].search([('rooms_ids', '=', 'normal')], limit=1)
+            if not normal_room:
+                raise ValidationError("No normal rooms available.")
+            vals['room_id'] = normal_room.id
+        elif adult_count <= 2 and children_count <= 2:
+            deluxe_room = self.env['hotel.rooms'].search([('rooms_ids', '=', 'deluxe')], limit=1)
+            if not deluxe_room:
+                raise ValidationError("No deluxe room avaliable")
+            vals['room_id'] = deluxe_room.id
+        else:
+            raise ValidationError("No rooms avaliable right now")
+
         booking = super(HotelBooking, self).create(vals)
         if booking.state == 'booked':
             booking.room_id.is_booked = True
@@ -135,12 +163,33 @@ class HotelBooking(models.Model):
     def write(self, vals):
         if 'room_id' in vals and not vals['room_id']:
             raise ValidationError("Please select a room before updating the booking.")
+        
+        # Automaticallyroom type on number of adult and child count
+        adult_count = vals.get('adult_count', self.adult_count)
+        children_count = vals.get('child_count', self.children_count)
+        
+        if adult_count <= 2 and children_count <= 1:
+            # Assign normal room
+            normal_room = self.env['hotel.rooms'].search([('rooms_ids', '=', 'normal')], limit=1)
+            if not normal_room:
+                raise ValidationError("No normal rooms available.")
+            vals['room_id'] = normal_room.id
+        elif adult_count <= 2 and children_count <= 2:
+            # Assign deluxe room
+            deluxe_room = self.env['hotel.rooms'].search([('rooms_ids', '=', 'deluxe')], limit=1)
+            if not deluxe_room:
+                raise ValidationError("No deluxe rooms available.")
+            vals['room_id'] = deluxe_room.id
+        else:
+            raise ValidationError("No suitable room available for the given number of adults and children.")
+        
         if 'room_id' in vals:
             for record in self:
                 record.room_id.is_booked = False
                 new_room = self.env['hotel.rooms'].browse(vals['room_id'])
                 new_room.is_booked = True
         return super(HotelBooking, self).write(vals)
+
 
     def unlink(self):
         for record in self:

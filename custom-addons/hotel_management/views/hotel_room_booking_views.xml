@@ -41,8 +41,11 @@
                             <field name="contact"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
+                            <field name="adult_count"/>
+                            <field name="children_count"/>
                             <field name="email_id"/>
                             <field name="document_proof"/>
+                            
                         </group>
                         <group string = "Room Details">
                             <field name="room_id" domain="[('is_booked', '=', False)]"/>
