@@ -28,8 +28,9 @@
                 <sheet>
                     <group >
                         <field name="room_id"/>
-                        <field name="food_id"/>
-                        <field name="price"/>
+                        <field name="food_id" widget = 'many2many_tags'/>
+                        <field name="price" invisible = '1'/>
+                        <field name="total_bill"/>
                         <!-- <field name="food_image"/> -->
 
                     </group>
