@@ -7,8 +7,10 @@
             <field name="model">hotel.rental</field>
             <field name="arch" type="xml">
                 <tree>
-                     <field name="date_of_arrival"/>
-                     <field name="pick_up_location"/>
+                    <field name="date_of_arrival" />
+                    <field name="pick_up_location" />
+                    <field name="no_of_people" />
+                    <field name="vehcile_type" />
                 </tree>
 
             </field>
@@ -20,13 +22,30 @@
             <field name="model">hotel.rental</field>
             <field name="arch" type="xml">
                 <form string="Hotel Rental">
+                    <header>
+                        <button name="action_book" type="object" string="Book" invisible = 'state != "draft"' class = 'oe_highlight'/>
+                        <button name="action_cancel" type="object" string="Cancel Booking" invisible = 'state != "book"' class = 'oe_highlight'/>
+                        <field name="state" widget = 'statusbar'/>
+                    </header>
                     <sheet>
                         <group>
-                            <field name="date_of_arrival"  widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <field name="customer_id"/>
+                            <field name="customer_email"/>
+                            <field name="customer_number"/>
+                            <field name="date_of_arrival" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}' />
                             <field name="pick_up_location" />
+                            <field name="distance"/>
+                            <field name="no_of_people" />
+                            <field name="vehcile_type" />
+                            <field name="total_cost"/>
 
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
 
                 </form>
             </field>
@@ -50,6 +69,6 @@
             <field name="res_model">hotel.rental</field>
             <field name="view_mode">tree,form</field>
         </record>
-        <menuitem id="rental_service_menu" name="Rental Service" action="action_hotel_rental" parent="hotel_menu" sequence="60"/>
+        <menuitem id="rental_service_menu" name="Rental Service" action="action_hotel_rental" parent="hotel_menu" sequence="60" />
     </data>
 </odoo>
