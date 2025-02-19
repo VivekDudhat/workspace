@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- View hotel.rental Tree -->
+        <record id="view_hotel_rental_tree" model="ir.ui.view">
+            <field name="name">view.hotel.rental.tree</field>
+            <field name="model">hotel.rental</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="date_of_arrival"/>
+                     <field name="pick_up_location"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <!-- View hotel.rental Form -->
+        <record id="view_hotel_rental_form" model="ir.ui.view">
+            <field name="name">view.hotel.rental.form</field>
+            <field name="model">hotel.rental</field>
+            <field name="arch" type="xml">
+                <form string="Hotel Rental">
+                    <sheet>
+                        <group>
+                            <field name="date_of_arrival"  widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <field name="pick_up_location" />
+
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- View hotel.rental Search -->
+        <record id="view_hotel_rental_search" model="ir.ui.view">
+            <field name="name">view.hotel.rental.search</field>
+            <field name="model">hotel.rental</field>
+            <field name="arch" type="xml">
+                <search>
+
+                </search>
+            </field>
+        </record>
+
+        <!-- Action hotel.rental -->
+        <record id="action_hotel_rental" model="ir.actions.act_window">
+            <field name="name">Hotel Rental</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hotel.rental</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="rental_service_menu" name="Rental Service" action="action_hotel_rental" parent="hotel_menu" sequence="60"/>
+    </data>
+</odoo>

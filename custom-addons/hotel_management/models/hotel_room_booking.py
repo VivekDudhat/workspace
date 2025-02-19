@@ -12,7 +12,6 @@ class HotelBooking(models.Model):
     
 
     customer_name = fields.Char(string="Customer Name", )
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
     contact = fields.Char(string='Contact Number', )
     date_of_birth = fields.Date(string='Date Of Birth')
     age = fields.Integer(string="Age", compute='_compute_age', store=True)
@@ -24,6 +23,7 @@ class HotelBooking(models.Model):
     room_type =fields.Many2one (string='Room Type', related='room_id.rooms_ids')
     room_price = fields.Float(string = "Price",related='room_id.price')
     room_image = fields.Image(string="Room Image", related='room_id.rooms_ids.room_image', store=True)
+    customer_photo = fields.Image(string="Customer Photo", max_width=128, max_height=128)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('booked', 'Booked'),

@@ -6,3 +6,4 @@ access_hotel_resturant_manager,hotel.resturant,model_hotel_resturant,base.group_
 access_room_type_manager,room.type,model_room_type,base.group_user,1,1,1,1
 access_hotel_room_booking_manager,hotel.room.booking,model_hotel_room_booking,base.group_user,1,1,1,1
 access_hotel_room_cleaning_manager,hotel.room.cleaning,model_hotel_room_cleaning,,1,1,1,1
+access_hotel_rental_manager,hotel.rental,model_hotel_rental,base.group_user,1,1,1,1

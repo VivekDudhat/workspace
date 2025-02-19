@@ -36,8 +36,8 @@
                     </header>
                     <sheet>
                         <group string="Customer Details">
+                            <field name="customer_photo" widget = "image" class="oe_avatar" style="max-width: 128px; max-height: 128px;"/>
                             <field name="customer_name"/>
-                            <field name="gender" widget = "radio" options ="{'horizontal':'true'}"/>
                             <field name="contact"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
@@ -45,7 +45,7 @@
                             <field name="children_count"/>
                             <field name="email_id"/>
                             <field name="document_proof"/>
-                            
+
                         </group>
                         <group string = "Room Details">
                             <field name="room_id" domain="[('is_booked', '=', False)]"/>

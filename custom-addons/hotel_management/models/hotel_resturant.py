@@ -73,9 +73,8 @@ class HotelResturant(models.Model):
     def _post_message(self):
         for record in self:
            food_details = "\n".join([f"- {food.name}: {food.lst_price}" for food in record.food_id])
-           total_bill = f"Total Bill: {record.total_bill}"
-        
-           message = f"Food Ordered:\n{food_details}\n\n{total_bill}"
+           total_bill =  f"Total Bill: {record.total_bill}"
+           message = f"Food Ordered:\n{food_details}\n{total_bill}"
 
            record.message_post(
                body=message,

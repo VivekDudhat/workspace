@@ -23,7 +23,7 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
-    command: ["odoo","-c","/etc/odoo/odoo.conf","-d","db_hotel_management","-u","hotel_management"]
+    command: ["odoo","-c","/etc/odoo/odoo.conf","-d","db_hotel_management", "-u","hotel_management"]
         
     volumes:
       - odoo:/var/lib/odoo
