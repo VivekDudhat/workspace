@@ -1,35 +1,118 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-    
-         <record id="email_template_confirm" model="mail.template">
+        <record id="email_template_confirm" model="mail.template">
             <field name="name">Booking Email</field>
             <field name="subject"></field>
-            <field name="subject">echile Booked</field>
+            <field name="subject">Vechile Booked</field>
             <field name="email_from">testpatient941@gmail.com</field>
             <field name="email_to">{{ object.customer_email }}</field>
             <field name="lang">${ object.lang }</field>
             <field name="model_id" ref="hotel_management.model_hotel_rental"/>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
-                    <div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;width:40%">
-                        <h2>Hi, <t t-out="object.customer_id.customer_name"/></h2>
+                    <div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        <h2>Hi, <t t-out="object.customer_id.customer_name"/>
+                        </h2>
                         <h3> Your vehcile Booking details are mentioned below : </h3>
-                        <p><strong>Vehicle Type:</strong> <t t-out="object.vehcile_type"/></p>
-                        <p><strong>Pick-up Location:</strong> <t t-out="object.pick_up_location"/></p>
-                        <p><strong>Date of Arrival:</strong> <t t-out="object.date_of_arrival.strftime('%d-%m-%Y %H:%M')"/></p>
-                        <p><strong>Total Cost:</strong> $<t t-out="object.total_cost"/></p>
+                        <p>
+                            <strong>Vehicle Type:</strong>
+                            <t t-out="object.vehcile_type"/>
+                        </p>
+                        <p>
+                            <strong>Pick-up Location:</strong>
+                            <t t-out="object.pick_up_location"/>
+                        </p>
+                        <p>
+                            <strong>Date of Arrival:</strong>
+                            <t t-out="object.date_of_arrival.strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+                        <p>
+                            <strong>Total Cost:</strong> $                            <t t-out="object.total_cost"/>
+                        </p>
                         <br/>
                         <p>Thank you for choosing our services.</p>
                         <p>Regards,</p>
                         <p>Hotel Management Team</p>
                     </div>
-                    
-                
                 </div>
             </field>
         </record>
-    
+        <record id="email_template_cancel_booking_refund" model="mail.template">
+            <field name="name">Booking Email</field>
+            <field name="subject"></field>
+            <field name="subject">Vechile Booked</field>
+            <field name="email_from">testpatient941@gmail.com</field>
+            <field name="email_to">{{ object.customer_email }}</field>
+            <field name="lang">${ object.lang }</field>
+            <field name="model_id" ref="hotel_management.model_hotel_rental"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        <h2>Hi, <t t-out="object.customer_id.customer_name"/>
+                        </h2>
+                        <h3> Your Booking details are mentioned below : </h3>
+                        <p>
+                            <strong>Vehicle Type:</strong>
+                            <t t-out="object.vehcile_type"/>
+                        </p>
+                        <p>
+                            <strong>Pick-up Location:</strong>
+                            <t t-out="object.pick_up_location"/>
+                        </p>
+                        <p>
+                            <strong>Date of Arrival:</strong>
+                            <t t-out="object.date_of_arrival.strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+                        <p>
+                            <strong>Total Cost:</strong> $                            <t t-out="object.total_cost"/>
+                        </p>
+                        <br/>
+                        <p>You have cancelled the booking you are elible for refund</p>
+                        <p>Thank you for choosing our services.</p>
+                        <p>Regards,</p>
+                        <p>Hotel Management Team</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+         <record id="email_template_cancel_booking" model="mail.template">
+            <field name="name">Booking Email</field>
+            <field name="subject"></field>
+            <field name="subject">Vechile Booked</field>
+            <field name="email_from">testpatient941@gmail.com</field>
+            <field name="email_to">{{ object.customer_email }}</field>
+            <field name="lang">${ object.lang }</field>
+            <field name="model_id" ref="hotel_management.model_hotel_rental"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        <h2>Hi, <t t-out="object.customer_id.customer_name"/>
+                        </h2>
+                        <h3> Your vehcile Booking details are mentioned below : </h3>
+                        <p>
+                            <strong>Vehicle Type:</strong>
+                            <t t-out="object.vehcile_type"/>
+                        </p>
+                        <p>
+                            <strong>Pick-up Location:</strong>
+                            <t t-out="object.pick_up_location"/>
+                        </p>
+                        <p>
+                            <strong>Date of Arrival:</strong>
+                            <t t-out="object.date_of_arrival.strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+                        <p>
+                            <strong>Total Cost:</strong> $                            <t t-out="object.total_cost"/>
+                        </p>
+                        <br/>
+                        <p>You have cancelled the booking and you are not elible for refund</p>
+                        <p>Thank you for choosing our services.</p>
+                        <p>Regards,</p>
+                        <p>Hotel Management Team</p>
+                    </div>
+                </div>
+            </field>
+        </record>
     </data>
-    
 </odoo>

@@ -7,10 +7,12 @@
             <field name="model">hotel.rental</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="customer_id"/>
                     <field name="date_of_arrival" />
                     <field name="pick_up_location" />
                     <field name="no_of_people" />
                     <field name="vehcile_type" />
+                    <field name="state" widget = 'badge' decoration-success = "state == 'book'" decoration-danger = "state == 'cancel'"/>
                 </tree>
 
             </field>
@@ -21,7 +23,8 @@
             <field name="name">view.hotel.rental.form</field>
             <field name="model">hotel.rental</field>
             <field name="arch" type="xml">
-                <form string="Hotel Rental">
+                <form string="Hotel Rental" readonly="1"
+                >
                     <header>
                         <button name="action_book" type="object" string="Book" invisible = 'state != "draft"' class = 'oe_highlight'/>
                         <button name="action_cancel" type="object" string="Cancel Booking" invisible = 'state != "book"' class = 'oe_highlight'/>
@@ -33,11 +36,12 @@
                             <field name="customer_email"/>
                             <field name="customer_number"/>
                             <field name="date_of_arrival" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}' />
-                            <field name="pick_up_location" />
+                            <field name="pick_up_location" widget = 'radio' options = "{'horizontal' : true}"/>
                             <field name="distance"/>
                             <field name="no_of_people" />
                             <field name="vehcile_type" />
                             <field name="total_cost"/>
+                           
 
                         </group>
                     </sheet>

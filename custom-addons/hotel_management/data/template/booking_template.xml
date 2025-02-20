@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="email_template_room_booking" model="mail.template">
+            <field name="name">Booking Email</field>
+            <field name="subject"></field>
+            <field name="subject">Room Booked</field>
+            <field name="email_from">testpatient941@gmail.com</field>
+            <field name="email_to">{{ object.email_id }}</field>
+            <field name="lang">${ object.lang }</field>
+            <field name="model_id" ref="hotel_management.model_hotel_room_booking"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        <h2>Hi, <t t-out="object.customer_name"/>
+                        </h2>
+                        <h3> Your vehcile Booking details are mentioned below : </h3>
+                        <p>
+                            <strong>Room Type:</strong>
+                            <t t-out="object.room_type"/>
+                        </p>
+                        <p>
+                            <strong>Room number:</strong>
+                            <t t-out="object.room_id"/>
+                        </p>
+                        <p>
+                            <strong>Check-in Date:</strong>
+                            <t t-out="object.check_in.strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+                        <br/>
+                        <p>Thank you for choosing our services.</p>
+                        <p>Regards,</p>
+                        <p>Hotel Management Team</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

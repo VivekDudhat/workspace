@@ -23,7 +23,10 @@ Long description of module's purpose
     # always loaded
     "data": [
         "security/ir.model.access.csv",
+        
+        "data/template/booking_template.xml",
         "data/template/email_template.xml",
+
         "views/views.xml",
         "views/templates.xml",
         "views/hotel_rooms_views.xml",

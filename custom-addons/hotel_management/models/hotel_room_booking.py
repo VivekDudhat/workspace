@@ -34,6 +34,7 @@ class HotelBooking(models.Model):
     adult_count = fields.Integer(string="No of Adult")
     children_count = fields.Integer(string = "No of Children")
     
+    
 
     
     @api.constrains('self')
@@ -117,6 +118,9 @@ class HotelBooking(models.Model):
             if record.state == 'draft':
                 record.state = 'booked'
                 record.room_id.is_booked = True
+                # book_template = self.env.ref('hotel_management.email_template_room_booking')
+                # if book_template:
+                #     book_template.send_mail(record.id,force_send = True)
 
     def action_check_in(self):
         for record in self:

@@ -1,5 +1,5 @@
 from odoo import fields,api,models
-from datetime import date,datetime
+from datetime import date,datetime,timedelta
 
 
 
@@ -16,11 +16,11 @@ class HotelRental(models.Model):
     date_of_arrival= fields.Datetime(string = "Date of arrival",)
     pick_up_location = fields.Selection([('airport', 'Airport'),('bus stop','Bus Stop'),('railway station','Railway Station')])
     no_of_people = fields.Integer(string = "Number of people",)
-    vehcile_type = fields.Selection([('car', 'Car'),('mini van','Mini Van'),('tempo traveller','Tempo Traveller')],readonly=True)
+    vehcile_type = fields.Selection([('car', 'Car'),('mini van','Mini Van'),('tempo traveller','Tempo Traveller')])
     state = fields.Selection([('draft','Draft'),('book', 'Book'),('cancel','Cancel')],default='draft')
     distance = fields.Float(string = 'Total Distance',  default=0.0)
     total_cost = fields.Float(string='Total Amount', compute="_compute_total_cost", store=True)
-
+    booking_time = fields.Datetime()
 
     @api.onchange('no_of_people')
     def _onchange_field(self):
@@ -54,13 +54,28 @@ class HotelRental(models.Model):
     def action_book(self):
         for records in self :
             records.state = 'book'
+            records.booking_time = fields.Datetime.now()
             template_id = self.env.ref('hotel_management.email_template_confirm')
             if template_id:
                 template_id.send_mail(records.id,force_send = True)
 
     def action_cancel(self):
         for records in self:
-            records.state = 'cancel'
+            if records.state == 'book':
+                cuurent_time = fields.Datetime.now()
+                booking_time = records.booking_time
+                time_difference = cuurent_time - booking_time
+                if time_difference <= timedelta(minutes=10):
+                    records.state = 'cancel'
+                    refund_template = self.env.ref('hotel_management.email_template_cancel_booking_refund')
+                    refund_template.send_mail(records.id,force_send=True)
+                else:
+                    records.state = 'cancel'
+                    cancel_template = self.env.ref('hotel_management.email_template_cancel_booking')
+                    cancel_template.send_mail(records.id,force_send=True)
+            else:
+                records.state = 'cancel'
+            
 
 
    
