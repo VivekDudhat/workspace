@@ -17,7 +17,7 @@
                         <h3> Your vehcile Booking details are mentioned below : </h3>
                         <p>
                             <strong>Vehicle Type:</strong>
-                            <t t-out="object.vehcile_type"/>
+                            <t t-out="object.vehicle_type"/>
                         </p>
                         <p>
                             <strong>Pick-up Location:</strong>

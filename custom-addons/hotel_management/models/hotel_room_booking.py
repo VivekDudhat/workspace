@@ -49,6 +49,8 @@ class HotelBooking(models.Model):
     resturant_id = fields.Many2one('hotel.resturant',string='resturant',)
     food = fields.Char(string = 'food name',related='resturant_id.food_name')
     food_bill = fields.Float(string = 'Bill',related='resturant_id.total_bill')
+    cleaning_id = fields.Many2one('hotel.room.cleaning',string='cleaning',)
+    
 
     
     

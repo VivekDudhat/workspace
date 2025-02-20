@@ -56,8 +56,8 @@ class HotelRental(models.Model):
             records.state = 'book'
             records.booking_time = fields.Datetime.now()
             template_id = self.env.ref('hotel_management.email_template_confirm')
-            # if template_id:
-            #     template_id.send_mail(records.id,force_send = True)
+            if template_id:
+                template_id.send_mail(records.id,force_send = True)
 
     def action_cancel(self):
         for records in self:

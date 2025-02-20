@@ -11,16 +11,34 @@
                     <h3>Customer Details</h3>
                     <table class="table">
                         <tr>
-                            <td><strong>Name:</strong> <t t-esc="booking.customer_name"/></td>
-                            <td><strong>Contact:</strong> <t t-esc="booking.contact"/></td>
+                            <td>
+                                <strong>Name:</strong>
+                                <t t-esc="booking.customer_name"/>
+                            </td>
+                            <td>
+                                <strong>Contact:</strong>
+                                <t t-esc="booking.contact"/>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Email:</strong> <t t-esc="booking.email_id"/></td>
-                            <td><strong>Check-In:</strong> <t t-esc="booking.check_in"/></td>
+                            <td>
+                                <strong>Email:</strong>
+                                <t t-esc="booking.email_id"/>
+                            </td>
+                            <td>
+                                <strong>Check-In:</strong>
+                                <t t-esc="booking.check_in"/>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Check-Out:</strong> <t t-esc="booking.check_out"/></td>
-                            <td><strong>Room Type:</strong> <t t-esc="booking.room_id.rooms_ids.room_type"/></td>
+                            <td>
+                                <strong>Check-Out:</strong>
+                                <t t-esc="booking.check_out"/>
+                            </td>
+                            <td>
+                                <strong>Room Type:</strong>
+                                <t t-esc="booking.room_id.rooms_ids.room_type"/>
+                            </td>
                         </tr>
                     </table>
 
@@ -36,10 +54,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><t t-esc="booking.room_id.rooms_ids.room_type"/></td>
-                                <td><t t-esc="booking.room_price"/></td>
-                                <td><t t-esc="(booking.check_out - booking.check_in).days"/></td>
-                                <td><t t-esc="booking.total_price"/></td>
+                                <td>
+                                    <t t-esc="booking.room_id.rooms_ids.room_type"/>
+                                </td>
+                                <td>
+                                    <t t-esc="booking.room_price"/>
+                                </td>
+                                <td>
+                                    <t t-esc="(booking.check_out - booking.check_in).days"/>
+                                </td>
+                                <td>
+                                    <t t-esc="booking.total_price"/>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,8 +81,12 @@
                         <tbody>
                             <t t-foreach="booking.amenity_id" t-as="amenity">
                                 <tr>
-                                    <td><t t-esc="amenity.amenity"/></td>
-                                    <td><t t-esc="amenity.charge"/></td>
+                                    <td>
+                                        <t t-esc="amenity.amenity"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="amenity.charge"/>
+                                    </td>
                                 </tr>
                             </t>
                         </tbody>
@@ -72,37 +102,76 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><t t-esc="booking.vehicle_id.vehicle_type"/></td>
-                                <td><t t-esc="booking.vechicle_charge"/></td>
+                                <td>
+                                    <t t-esc="booking.vehicle_id.vehicle_type"/>
+                                </td>
+                                <td>
+                                    <t t-esc="booking.vechicle_charge"/>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
 
                     <h3>Room Cleaning Service</h3>
-                    <t t-if="booking.state == 'checked_out'">
-                        <p>The room was cleaned before checkout.</p>
+                    <t t-if="booking.cleaning_id">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Cleaning Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="booking.cleaning_id" t-as="cleaning">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="cleaning.customer_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="cleaning.total_cost"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
                     </t>
                     <t t-else="">
-                        <p>Room cleaning is scheduled at checkout.</p>
+                        <p>No room cleaning service booked.</p>
                     </t>
 
                     <h3>Total Amount</h3>
                     <table class="table">
                         <tr>
-                            <td><strong>Room Total:</strong></td>
-                            <td><t t-esc="booking.total_price"/></td>
+                            <td>
+                                <strong>Room Total:</strong>
+                            </td>
+                            <td>
+                                <t t-esc="booking.total_price"/>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Amenities Total:</strong></td>
-                            <td><t t-esc="booking.total_charge"/></td>
+                            <td>
+                                <strong>Amenities Total:</strong>
+                            </td>
+                            <td>
+                                <t t-esc="booking.total_charge"/>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Vehicle Total:</strong></td>
-                            <td><t t-esc="booking.vechicle_charge"/></td>
+                            <td>
+                                <strong>Vehicle Total:</strong>
+                            </td>
+                            <td>
+                                <t t-esc="booking.vechicle_charge"/>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Final Amount:</strong></td>
-                            <td><t t-esc="booking.total_price + booking.total_charge + booking.vechicle_charge"/></td>
+                            <td>
+                                <strong>Final Amount:</strong>
+                            </td>
+                            <td>
+                                <t t-esc="booking.total_price + booking.total_charge + booking.vechicle_charge"/>
+                            </td>
                         </tr>
                     </table>
 
