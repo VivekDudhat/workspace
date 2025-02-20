@@ -22,6 +22,7 @@
             <form string="Hotel Room Cleaning">
                 <sheet>
                     <group>
+                        <field name="customer_id"/>
                         <field name="cleaning_id"/>
                         <field name="cleaning_date" widget = 'datetime' options = '{"min_date": "today", "min_datetime": "today"}'/>
                         <field name="charge"/>

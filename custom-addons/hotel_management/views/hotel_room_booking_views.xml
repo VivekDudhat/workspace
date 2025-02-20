@@ -32,6 +32,7 @@
                         <button string="Check-In" type="object" name="action_check_in" invisible =  "state != 'booked'" class = "oe_highlight" icon = "fa-check"/>
                         <button string="Check-Out" type="object" name="action_check_out" invisible = "state != 'checked_in'" class = "oe_highlight" icon = "fa-times"/>
                         <button string="Cancel Booking" type="object" name="action_cancel" invisible = "state != 'booked'" class = "oe_highlight" icon = "fa-times"/>
+                        <button name="action_print_booking_report" type="object" string="Print"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,booked,checked_in,checked_out,canceled"/>
                     </header>
                     <sheet>
@@ -45,6 +46,7 @@
                             <field name="children_count"/>
                             <field name="email_id"/>
                             <field name="document_proof"/>
+                            
 
                         </group>
                         <group string = "Room Details">
@@ -53,8 +55,13 @@
                             <field name="room_price"/>
                             <field name="check_in" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
                             <field name="check_out" widget="datetime" options='{"min_date": "today", "min_datetime": "today"}'/>
+                            <field name="total_price"/>
+                            <field name="amenity_id" widget = "many2many_tags"/>
+                            <field name="amenity_charge" invisible = '1'/>
+                            <field name="total_charge"/>
                             <!-- <field name="room_image"/> -->
                         </group>
+
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" groups="base.group_user"/>

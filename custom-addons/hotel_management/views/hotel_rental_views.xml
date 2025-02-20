@@ -11,7 +11,7 @@
                     <field name="date_of_arrival" />
                     <field name="pick_up_location" />
                     <field name="no_of_people" />
-                    <field name="vehcile_type" />
+                    <field name="vehicle_type" />
                     <field name="state" widget = 'badge' decoration-success = "state == 'book'" decoration-danger = "state == 'cancel'"/>
                 </tree>
 
@@ -39,7 +39,7 @@
                             <field name="pick_up_location" widget = 'radio' options = "{'horizontal' : true}"/>
                             <field name="distance"/>
                             <field name="no_of_people" />
-                            <field name="vehcile_type" />
+                            <field name="vehicle_type" />
                             <field name="total_cost"/>
                            
 

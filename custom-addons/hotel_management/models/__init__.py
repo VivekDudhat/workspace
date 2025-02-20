@@ -7,3 +7,4 @@ from . import hotel_room_type
 from . import hotel_room_booking
 from . import hotel_room_cleaning
 from . import hotel_rental
+from . import hotel_amenities

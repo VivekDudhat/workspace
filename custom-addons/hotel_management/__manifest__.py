@@ -23,6 +23,8 @@ Long description of module's purpose
     # always loaded
     "data": [
         "security/ir.model.access.csv",
+        "reports/booking_report_action.xml",
+        "reports/check_out_booking_report.xml",
         
         "data/template/booking_template.xml",
         "data/template/email_template.xml",
@@ -35,7 +37,8 @@ Long description of module's purpose
         "views/room_type_views.xml",
         "views/hotel_room_booking_views.xml",
         "views/hotel_room_cleaning_views.xml",
-        "views/hotel_rental_views.xml"
+        "views/hotel_rental_views.xml",
+        "views/hotel_amenities_views.xml"
     ],
     # only loaded in demonstration mode
     'demo': [

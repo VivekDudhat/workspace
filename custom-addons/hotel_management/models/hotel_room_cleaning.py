@@ -10,6 +10,7 @@ class RoomCleaning(models.Model):
     cleaning_date = fields.Date(string='Cleaning Date', default=fields.Date.today, required=True)
     charge = fields.Float(string = 'Charge for Room cleaning',default='500', readonly=True)
     total_cost = fields.Float(string='Total Charge', compute='_compute_charge', store=True)
+    customer_id = fields.Many2one('hotel.room.booking', string = 'Customer Name')
 
     @api.depends('cleaning_id', 'cleaning_date')
     def _compute_charge(self):

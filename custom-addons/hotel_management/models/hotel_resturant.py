@@ -6,7 +6,7 @@ class HotelResturant(models.Model):
     _description = 'Hotel Restaurant'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'room_id'
-
+     
     room_id = fields.Many2one('hotel.rooms', string="Room", required=True, tracking=True)
     food_id = fields.Many2many(
         'product.product',
@@ -20,6 +20,8 @@ class HotelResturant(models.Model):
     food_image = fields.Binary(string="Food Image", related='food_id.image_1920', store=True)
     total_bill = fields.Float(string="Total Bill", compute='_compute_total_bill', store=True,tracking = True)
     state = fields.Selection([('order', 'Order'), ('cancel', 'Cancel')],)
+    customer_id = fields.Many2one('hotel.room.booking', string = 'Customer Name')
+    
 
     @api.depends('food_id')
     def _compute_total_bill(self):

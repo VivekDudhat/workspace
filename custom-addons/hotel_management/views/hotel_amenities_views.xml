@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hotel.amenities View Tree -->
+    <record id="view_hotel_amenities_tree" model="ir.ui.view">
+        <field name="name">view.hotel.amenities.tree</field>
+        <field name="model">hotel.amenities</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="amenity"/>
+                <field name="charge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View hotel.amenities form -->
+    <record id="view_hotel_amenities_form" model="ir.ui.view">
+        <field name="name">view.hotel.amenities.form</field>
+        <field name="model">hotel.amenities</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Amenities">
+                <sheet>
+                    <group >
+                        <field name="amenity"/>
+                        <field name="charge"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View hotel.amenities search -->
+    <record id="view_hotel_amenities_search" model="ir.ui.view">
+        <field name="name">view.hotel.amenities.search</field>
+        <field name="model">hotel.amenities</field>
+        <field name="arch" type="xml">
+            <search>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- Action hotel.amenities -->
+    <record id="action_hotel_amenities" model="ir.actions.act_window">
+        <field name="name">Hotel Amenities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.amenities</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Hotel Amenities.
+            </p>
+        </field>
+    </record>
+    <menuitem id="amenities_menu" name="Amenities" action="action_hotel_amenities" parent="hotel_menu" sequence="70"/>
+
+</odoo>

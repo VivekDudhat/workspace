@@ -16,7 +16,7 @@ class HotelRental(models.Model):
     date_of_arrival= fields.Datetime(string = "Date of arrival",)
     pick_up_location = fields.Selection([('airport', 'Airport'),('bus stop','Bus Stop'),('railway station','Railway Station')])
     no_of_people = fields.Integer(string = "Number of people",)
-    vehcile_type = fields.Selection([('car', 'Car'),('mini van','Mini Van'),('tempo traveller','Tempo Traveller')])
+    vehicle_type = fields.Selection([('car', 'Car'),('mini van','Mini Van'),('tempo traveller','Tempo Traveller')])
     state = fields.Selection([('draft','Draft'),('book', 'Book'),('cancel','Cancel')],default='draft')
     distance = fields.Float(string = 'Total Distance',  default=0.0)
     total_cost = fields.Float(string='Total Amount', compute="_compute_total_cost", store=True)
@@ -25,11 +25,11 @@ class HotelRental(models.Model):
     @api.onchange('no_of_people')
     def _onchange_field(self):
         if self.no_of_people <= 3:
-            self.vehcile_type = 'car'
+            self.vehicle_type = 'car'
         elif self.no_of_people <= 6:
-            self.vehcile_type = 'mini van'
+            self.vehicle_type = 'mini van'
         else:
-            self.vehcile_type = 'tempo traveller'
+            self.vehicle_type = 'tempo traveller'
 
     @api.onchange('pick_up_location')
     def _onchange_distance(self):
@@ -43,9 +43,9 @@ class HotelRental(models.Model):
     @api.depends('no_of_people')
     def _compute_total_cost(self):
         for record in self:
-            if record.vehcile_type == 'car':
+            if record.vehicle_type == 'car':
                 rate_per_km = 20
-            elif record.vehcile_type == 'mini van':
+            elif record.vehicle_type == 'mini van':
                 rate_per_km = 25
             else:
                 rate_per_km = 30
@@ -56,8 +56,8 @@ class HotelRental(models.Model):
             records.state = 'book'
             records.booking_time = fields.Datetime.now()
             template_id = self.env.ref('hotel_management.email_template_confirm')
-            if template_id:
-                template_id.send_mail(records.id,force_send = True)
+            # if template_id:
+            #     template_id.send_mail(records.id,force_send = True)
 
     def action_cancel(self):
         for records in self:

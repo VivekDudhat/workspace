@@ -24,6 +24,7 @@ class HotelBooking(models.Model):
     room_price = fields.Float(string = "Price",related='room_id.price')
     room_image = fields.Image(string="Room Image", related='room_id.rooms_ids.room_image', store=True)
     customer_photo = fields.Image(string="Customer Photo", max_width=128, max_height=128)
+    total_price = fields.Float(string = "Total Amount", compute = '_total_amount')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('booked', 'Booked'),
@@ -31,8 +32,25 @@ class HotelBooking(models.Model):
         ('checked_out', 'Checked-Out'),
         ('canceled', 'Canceled'),
     ], string="State", default='draft', readonly=True,tracking = True)
+    amenity_id = fields.Many2many(
+        'hotel.amenities',
+        'booking_amenities_rel',
+        'amenity_id',
+        'booking_id',
+        string="Amenities"
+    )
+    amenity_charge = fields.Float(string = "Amenity Charge",related='amenity_id.charge')
+    total_charge = fields.Float(string = 'Total charge', compute = '_total_charge')
     adult_count = fields.Integer(string="No of Adult")
     children_count = fields.Integer(string = "No of Children")
+    vehicle_id = fields.Many2one('hotel.rental',string='vehicle',)
+    vehicle_name = fields.Selection(string = "Vehicle name",related='vehicle_id.vehicle_type')
+    vechicle_charge = fields.Float(string = "Vehicle")
+    resturant_id = fields.Many2one('hotel.resturant',string='resturant',)
+    food = fields.Char(string = 'food name',related='resturant_id.food_name')
+    food_bill = fields.Float(string = 'Bill',related='resturant_id.total_bill')
+
+    
     
     
 
@@ -70,6 +88,21 @@ class HotelBooking(models.Model):
             else:
                 record.age = 0
 
+    @api.depends('check_in','check_out','room_price')
+    def _total_amount(self):
+        for record in self:
+            if record.check_in and record.check_out:
+                num_days = (record.check_out - record.check_in).days
+                num_days = num_days = num_days if num_days > 0 else 1 
+                record.total_price = num_days * record.room_price
+            else:
+                record.total_price = 0.0
+
+    @api.depends('amenity_charge')
+    def _total_charge(self):
+        for record in self:
+            record.total_charge = sum(record.amenity_id.mapped('charge'))
+    
     @api.constrains('contact')
     def _check_contact_format(self):
         for record in self:
@@ -118,14 +151,16 @@ class HotelBooking(models.Model):
             if record.state == 'draft':
                 record.state = 'booked'
                 record.room_id.is_booked = True
-                # book_template = self.env.ref('hotel_management.email_template_room_booking')
-                # if book_template:
-                #     book_template.send_mail(record.id,force_send = True)
+                book_template = self.env.ref('hotel_management.email_template_room_booking')
+                if book_template:
+                    book_template.send_mail(record.id,force_send = True)
 
     def action_check_in(self):
         for record in self:
             if record.state == 'booked':
                 record.state = 'checked_in'
+               
+
 
     def action_check_out(self):
         for record in self:
@@ -200,3 +235,15 @@ class HotelBooking(models.Model):
             if record.state != 'checked_out':
                 record.room_id.is_booked = False
         return super(HotelBooking, self).unlink()
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        docs = self.env['hotel.room.booking'].browse(docids)
+        return {
+            'doc_ids': docids,
+            'doc_model': 'hotel.room.booking',
+            'docs': docs,
+           
+        }
+    def action_print_booking_report(self):
+        return self.env.ref('hotel_management.hotel_booking_report_action').report_action(self)
