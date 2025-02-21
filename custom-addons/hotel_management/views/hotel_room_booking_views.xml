@@ -102,7 +102,7 @@
         </record>
 
         <!-- Menu Item for Room Booking -->
-        <menuitem id="room_booking_menu" name="Booking" action="action_hotel_room_booking" parent="hotel_menu" sequence="40"/>
+        <menuitem id="room_booking_menu" name="Booking" action="action_hotel_room_booking" parent = "hotel_menu" sequence="10"/>
 
 
 

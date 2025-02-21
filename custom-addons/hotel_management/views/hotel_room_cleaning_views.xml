@@ -60,6 +60,6 @@
             </p>
         </field>
     </record>
-    <menuitem id="room_cleaning_menu" name="Room Cleaning" action="action_hotel_room_cleaning" parent="hotel_menu" sequence="50"/>
+    <menuitem id="room_cleaning_menu" name="Room Cleaning" action="action_hotel_room_cleaning" parent = "hotel_menu" sequence="40"/>
 
 </odoo>

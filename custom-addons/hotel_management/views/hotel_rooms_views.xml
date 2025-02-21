@@ -56,7 +56,7 @@
             name="Rooms"
             action="action_hotel_rooms"
             parent = "hotel_menu"
-            sequence = "10"
+            sequence = "60"
         />
 
 </odoo>

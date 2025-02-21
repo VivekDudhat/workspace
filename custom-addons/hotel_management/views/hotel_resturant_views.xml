@@ -74,8 +74,6 @@
         </field>
     </record>
 
-    <menuitem id="resturant_menu" name="Resturant" action="action_hotel_resturant"
-        parent = "hotel_menu"
-        sequence = "20" />
+    <menuitem id="resturant_menu" name="Resturant" action="action_hotel_resturant" parent = "hotel_menu" sequence = "30" />
 
 </odoo>
