@@ -3,88 +3,83 @@
     <template id="report_hotel_booking_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="booking">
-                <div class="page">
+                <div class="page" style="background-color: #fff; padding: 30px; margin: 20px auto; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); max-width: 800px; font-family: Arial, sans-serif; color: #333;">
+
                     <div style="text-align: center;">
-                        <h2>Hotel Booking Report</h2>
+                        <h2 style="color: #4CAF50; margin-bottom: 20px;">Hotel Booking Report</h2>
                     </div>
 
-                    <h3>Customer Details</h3>
-                    <table class="table">
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Customer Details</h3>
+                    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                         <tr>
-                            <td>
-                                <strong>Name:</strong>
-                                <t t-esc="booking.customer_name"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Name:</strong> <t t-esc="booking.customer_name"/>
                             </td>
-                            <td>
-                                <strong>Contact:</strong>
-                                <t t-esc="booking.contact"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Contact:</strong> <t t-esc="booking.contact"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <strong>Email:</strong>
-                                <t t-esc="booking.email_id"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Email:</strong> <t t-esc="booking.email_id"/>
                             </td>
-                            <td>
-                                <strong>Check-In:</strong>
-                                <t t-esc="booking.check_in"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Check-In:</strong> <t t-esc="booking.check_in"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <strong>Check-Out:</strong>
-                                <t t-esc="booking.check_out"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Check-Out:</strong> <t t-esc="booking.check_out"/>
                             </td>
-                            <td>
-                                <strong>Room Type:</strong>
-                                <t t-esc="booking.room_id.rooms_ids.room_type"/>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                <strong>Room Type:</strong> <t t-esc="booking.room_id.rooms_ids.room_type"/>
                             </td>
                         </tr>
                     </table>
 
-                    <h3>Room Booking Details</h3>
-                    <table class="table">
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Room Booking Details</h3>
+                    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                         <thead>
-                            <tr>
-                                <th>Room</th>
-                                <th>Room Price</th>
-                                <th>Total Nights</th>
-                                <th>Total Amount</th>
+                            <tr style="background-color: #4CAF50; color: white;">
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Room</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Room Price</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Total Nights</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Total Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
+                            <tr style="background-color: #f9f9f9;">
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="booking.room_id.rooms_ids.room_type"/>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="booking.room_price"/>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="(booking.check_out - booking.check_in).days"/>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="booking.total_price"/>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h3>Amenities Booked</h3>
-                    <table class="table">
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Amenities Booked</h3>
+                    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                         <thead>
-                            <tr>
-                                <th>Amenity</th>
-                                <th>Charge</th>
+                            <tr style="background-color: #4CAF50; color: white;">
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Amenity</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Charge</th>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="booking.amenity_id" t-as="amenity">
-                                <tr>
-                                    <td>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                         <t t-esc="amenity.amenity"/>
                                     </td>
-                                    <td>
+                                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                         <t t-esc="amenity.charge"/>
                                     </td>
                                 </tr>
@@ -92,42 +87,42 @@
                         </tbody>
                     </table>
 
-                    <h3>Rental Vehicle</h3>
-                    <table class="table">
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Rental Vehicle</h3>
+                    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                         <thead>
-                            <tr>
-                                <th>Vehicle</th>
-                                <th>Charge</th>
+                            <tr style="background-color: #4CAF50; color: white;">
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Vehicle</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Charge</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
+                            <tr style="background-color: #f9f9f9;">
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="booking.vehicle_id.vehicle_type"/>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                     <t t-esc="booking.vechicle_charge"/>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h3>Room Cleaning Service</h3>
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Room Cleaning Service</h3>
                     <t t-if="booking.cleaning_id">
-                        <table class="table">
+                        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                             <thead>
-                                <tr>
-                                    <th>Customer</th>
-                                    <th>Cleaning Cost</th>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Customer</th>
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Cleaning Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-foreach="booking.cleaning_id" t-as="cleaning">
-                                    <tr>
-                                        <td>
+                                    <tr style="background-color: #f9f9f9;">
+                                        <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                             <t t-esc="cleaning.customer_id.name"/>
                                         </td>
-                                        <td>
+                                        <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                             <t t-esc="cleaning.total_cost"/>
                                         </td>
                                     </tr>
@@ -139,43 +134,45 @@
                         <p>No room cleaning service booked.</p>
                     </t>
 
-                    <h3>Total Amount</h3>
-                    <table class="table">
+                    <h3 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">Total Amount</h3>
+                    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                         <tr>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <strong>Room Total:</strong>
                             </td>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <t t-esc="booking.total_price"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <strong>Amenities Total:</strong>
                             </td>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <t t-esc="booking.total_charge"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <strong>Vehicle Total:</strong>
                             </td>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <t t-esc="booking.vechicle_charge"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
+                        <tr style="font-weight: bold; font-size: 18px; color: #333;">
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <strong>Final Amount:</strong>
                             </td>
-                            <td>
+                            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">
                                 <t t-esc="booking.total_price + booking.total_charge + booking.vechicle_charge"/>
                             </td>
                         </tr>
                     </table>
 
-                    <p style="text-align: center; margin-top: 30px;">Thank you for choosing our hotel!</p>
+                    <div style="text-align: center; margin-top: 40px; font-size: 14px; color: #777;">
+                        <p>Thank you for choosing our hotel!</p>
+                    </div>
                 </div>
             </t>
         </t>

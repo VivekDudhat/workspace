@@ -44,19 +44,13 @@ class HotelBooking(models.Model):
     adult_count = fields.Integer(string="No of Adult")
     children_count = fields.Integer(string = "No of Children")
     vehicle_id = fields.Many2one('hotel.rental',string='vehicle',)
-    vehicle_name = fields.Selection(string = "Vehicle name",related='vehicle_id.vehicle_type')
+    vehicle_name = fields.Selection(string = "Vehicle name",related='vehicle_id.vehicle_type', store = 'True')
     vechicle_charge = fields.Float(string = "Vehicle")
     resturant_id = fields.Many2one('hotel.resturant',string='resturant',)
     food = fields.Char(string = 'food name',related='resturant_id.food_name')
     food_bill = fields.Float(string = 'Bill',related='resturant_id.total_bill')
     cleaning_id = fields.Many2one('hotel.room.cleaning',string='cleaning',)
-    
 
-    
-    
-    
-
-    
     @api.constrains('self')
     def _check_(self):
         for record in self:
